@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.vscode
+.vscode/
+
+# results and logs and temp files and data
+temp/
+outputs/
+data/
+data
+
+# 需要修改config.ini中的API key
+uv.lock
+.python-version
+.vscode/settings.json
+
+.env
