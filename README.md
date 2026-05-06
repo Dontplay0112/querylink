@@ -12,6 +12,8 @@ all the path are relative to the src/ folder. -->
 
 QueryLink bridges the semantic gap in agentic long-term memory via dual-side multi-view alignment, enabling robust reasoning and retrieval performance within a highly efficient flat memory architecture.
 
+*The code will be released after the conference. Any questions can be raised via Issues or contacting the corresponding author.*
+
 ## Quickstart Guide
 
 ### Python Environment Setup

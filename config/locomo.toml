@@ -1,0 +1,22 @@
+# all the paths are relative to src/
+[exp]
+task = "locomo"
+desc = "reproduction"
+base_data_path = "../data/"
+data_file_name = "locomo10.json"
+base_output_path = "../outputs/"
+max_workers = 10
+max_inflight = 10
+max_thread_workers = 16
+max_thread_inflight = 16
+# date = "20260217-105952"
+
+[agent]
+agent = "QueryLink"
+model_source = "openai" # openai / huggingface / ollama
+model_name = "gpt-4o-mini" # gpt-4o-mini / llama3.2:3b / qwen2.5:1.5b
+temperature = 0.0
+embed_model_source = "huggingface" # openai / huggingface / ollama
+embed_model_name = "sentence-transformers/all-MiniLM-L6-v2"  # thenlper/gte-large NovaSearch/stella_en_1.5B_v5 facebook/contriever  mahonzhan/all-MiniLM-L6-v2
+
+# memory_version = "20251213-171802-1-1-1"
