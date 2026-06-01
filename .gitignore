@@ -23,3 +23,5 @@ uv.lock
 .vscode/settings.json
 
 .env
+
+*.pdf
