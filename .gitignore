@@ -17,11 +17,12 @@ outputs/
 data/
 data
 
-# 需要修改config.ini中的API key
-uv.lock
+# Local environment and editor settings
 .python-version
 .vscode/settings.json
 
 .env
 
 *.pdf
+
+docs/

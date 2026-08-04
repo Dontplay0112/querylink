@@ -1,6 +1,7 @@
-"""
-Copied from A-mem
-modified to adapt to our framework
+"""A-Mem components adapted for the QueryLink framework.
+
+Upstream: https://github.com/WujiangXu/A-mem
+License and attribution: THIRD_PARTY_NOTICES.md
 """
 
 from ast import Str

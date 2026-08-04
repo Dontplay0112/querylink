@@ -10,8 +10,9 @@ import tomli_w
 import tomllib
 
 class MyBaseModel(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     def __str__(self):
-        # 参考print_config函数的实现
         data = self.model_dump(mode='json', exclude_none=True)
         for key, value in data.items():
             if isinstance(value, dict):
@@ -92,7 +93,6 @@ class MyConfig(MyBaseModel):
     ]
     other: Optional[Dict[str, Any]] = None
     
-    # 计算好日期并输入给exp的date字段和agent的memory_version字段
     @model_validator(mode='after')
     def setup_dates_and_versions(self):
         if not self.exp.date:
@@ -110,8 +110,7 @@ def load_config(sys_argv) -> MyConfig:
     if len(sys_argv) >= 2:
         config_path = sys_argv[1]
     else:
-        config_path = '../config/locomo.toml'
-        # config_path = '../config/longmemevalS.toml'
+        config_path = 'config/locomo.toml'
     
     path = Path(config_path)
     if not path.exists():
@@ -134,7 +133,11 @@ def load_config(sys_argv) -> MyConfig:
 
 def save_config(config: MyConfig, save_path: Union[str, Path]):
     path = Path(save_path)
-    data = config.model_dump(mode='json', exclude_none=True)
+    data = config.model_dump(
+        mode='json',
+        exclude_none=True,
+        exclude_computed_fields=True,
+    )
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "wb") as f:
         tomli_w.dump(data, f)
@@ -149,10 +152,9 @@ if __name__ == "__main__":
         # print_config(config)
         print(config)
         
-        # 验证解析出来的类型
         print(f"\nLoaded Agent Type: {type(config.agent).__name__}")
         
         save_path = config.exp.output_path / "config_snapshot.toml"
         save_config(config, save_path)
     except Exception as e:
-        pass # load_config 已经打印了错误
+        pass

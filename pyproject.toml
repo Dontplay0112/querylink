@@ -1,36 +1,46 @@
 [project]
-name = "memory"
+name = "querylink"
 version = "0.1.0"
-description = "Add your description here"
+description = "Official implementation of QueryLink for query-memory alignment in long-term LLM agents"
 readme = "README.md"
-requires-python = ">=3.12.12,<3.13"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
 dependencies = [
     "bert-score==0.3.13",
     "datasets>=4.4.2",
-    "deptry>=0.24.0",
     "langchain>=1.0.3",
+    "langchain-core>=1.0.3",
     "langchain-huggingface>=1.0.0",
     "langchain-ollama>=1.0.1",
     "langchain-openai>=1.0.1",
     "langchain-text-splitters>=1.0.0",
     "langgraph>=1.0.2",
-    "langgraph-cli[inmem]>=0.4.7",
     "litellm>=1.80.11",
-    "multiprocess>=0.70.16",
     "nltk>=3.9.2",
     "numpy>=2.3.4",
+    "ollama>=0.6.1",
+    "openai>=2.14.0",
+    "pydantic>=2.12.3",
     "python-dotenv>=1.2.1",
     "rank-bm25>=0.2.2",
-    "rouge==1.0.1",
+    "requests>=2.32.5",
     "rouge-score==0.1.2",
+    "scikit-learn>=1.7.2",
     "sentence-transformers>=5.1.2",
     "spacy>=3.8.11",
-    "toml>=0.10.2",
     "tomli-w>=1.2.0",
+    "torch>=2.9.0",
     "tqdm>=4.67.1",
+    "transformers>=4.57.1",
+    "typing-extensions>=4.15.0",
 ]
 
 [project.optional-dependencies]
 dev = [
+    "deptry>=0.24.0",
     "jupyter>=1.1.1",
 ]
+
+[tool.deptry]
+known_first_party = ["agent", "components", "task"]
+pep621_dev_dependency_groups = ["dev"]

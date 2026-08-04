@@ -1,23 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-export CUDA_VISIBLE_DEVICES="5,6,7"
+set -euo pipefail
+
+PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$PROJECT_ROOT"
+
 export PYTHONDONTWRITEBYTECODE=1
-find . -type d -name "__pycache__" -exec rm -r {} +
 
-# relative path to src/
-LOCOMO_CONFIG_PATH="config/locomo.toml"
-LONGMEMEVAL_CONFIG_PATH="config/longmemeval.toml"
-
-# read arguments
-if [ "$1" == "locomo" ]; then
-    CONFIG_PATH=$LOCOMO_CONFIG_PATH
-elif [ "$1" == "longmemeval" ]; then
-    CONFIG_PATH=$LONGMEMEVAL_CONFIG_PATH
-else
-    echo "Usage: $0 [locomo|longmemeval]"
-    exit 1
+if ! command -v uv >/dev/null 2>&1; then
+    echo "Error: uv is required. Install it from https://docs.astral.sh/uv/." >&2
+    exit 127
 fi
 
-cd src
-# uv run prepare.py
-uv run main.py $CONFIG_PATH
+case "${1:-}" in
+    locomo)
+        CONFIG_PATH="config/locomo.toml"
+        ;;
+    longmemeval)
+        CONFIG_PATH="config/longmemeval.toml"
+        ;;
+    *)
+        echo "Usage: $0 {locomo|longmemeval}" >&2
+        exit 2
+        ;;
+esac
+
+uv run python src/main.py "$CONFIG_PATH"
